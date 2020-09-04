@@ -8,8 +8,14 @@ let currentPlayerHealth = maxLife;
 
 adjustHealthBars(maxLife);
 
-function attackHandler() {
-  const damage = dealMonsterDamage(ATK);
+function attackMonster(mode) {
+  let maxDamage;
+  if (mode === 'ATK') {
+    maxDamage = ATK;
+  } else {
+    maxDamage = CRIT_ATK;
+  }
+  const damage = dealMonsterDamage(maxDamage);
   currentMonsterHealth -= damage;
   const playerDamage = dealPlayerDamage(MONSTER_ATK);
   currentPlayerHealth -= playerDamage;
@@ -22,18 +28,12 @@ function attackHandler() {
   }
 }
 
+function attackHandler() {
+  attackMonster('ATK');
+}
+
 function strongAttackHandler() {
-  const damage = dealMonsterDamage(CRIT_ATK);
-  currentMonsterHealth -= damage;
-  const playerDamage = dealPlayerDamage(MONSTER_ATK);
-  currentPlayerHealth -= playerDamage;
-  if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
-    alert('You Won!');
-  } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
-    alert('You Lost!');
-  } else if (currentMonsterHealth <= 0 && currentPlayerHealth <= 0) {
-    alert('You both lost.');
-  }
+  attackMonster('CRIT ATK');
 }
 
 attackBtn.addEventListener('click', attackHandler);
