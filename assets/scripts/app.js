@@ -6,12 +6,23 @@ const LAY_HANDS = 20;
 let maxLife = 250;
 let currentMonsterHealth = maxLife * 2;
 let currentPlayerHealth = maxLife;
+let hasBonusLife = true;
 
 adjustHealthBars(maxLife);
 
 function endRound() {
+  const initialPlayerHealth = currentPlayerHealth;
   const playerDamage = dealPlayerDamage(MONSTER_ATK);
   currentPlayerHealth -= playerDamage;
+
+  if (currentPlayerHealth <= 0 && hasBonusLife) {
+    hasBonusLife = false;
+    removeBonusLife();
+    currentPlayerHealth = initialPlayerHealth;
+    setPlayerHealth(currentPlayerHealth);
+    alert('Bonus life saved you!');
+  }
+
   if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
     alert('You Won!');
   } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
