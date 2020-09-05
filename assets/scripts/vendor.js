@@ -8,8 +8,8 @@ const healBtn = document.getElementById('heal-btn');
 const logBtn = document.getElementById('log-btn');
 
 function adjustHealthBars(maxLife) {
-  monsterHealthBar.max = maxLife * 2;
-  monsterHealthBar.value = maxLife * 2;
+  monsterHealthBar.max = maxLife;
+  monsterHealthBar.value = maxLife;
   playerHealthBar.max = maxLife;
   playerHealthBar.value = maxLife;
 }
@@ -32,7 +32,7 @@ function increasePlayerHealth(healValue) {
 
 function resetGame(value) {
   playerHealthBar.value = value;
-  monsterHealthBar.value = value;
+  monsterHealthBar.value = value * 2;
 }
 
 function removeBonusLife() {

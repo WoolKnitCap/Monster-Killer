@@ -3,7 +3,14 @@ const CRIT_ATK = ATK * 2.5;
 const MONSTER_ATK = 20;
 const LAY_HANDS = 20;
 
-let maxLife = 250;
+const pcValue = prompt("Player's max HP?", '100');
+
+let maxLife = parseInt(pcValue);
+
+if (isNaN(maxLife) || maxLife <= 0) {
+  maxLife = 100;
+}
+
 let currentMonsterHealth = maxLife * 2;
 let currentPlayerHealth = maxLife;
 let hasBonusLife = true;
@@ -11,10 +18,9 @@ let hasBonusLife = true;
 adjustHealthBars(maxLife);
 
 function reset() {
-  let currentMonsterHealth = maxLife * 2;
-  let currentPlayerHealth = maxLife;
+  currentMonsterHealth = maxLife * 2;
+  currentPlayerHealth = maxLife;
   resetGame(maxLife);
-  hasBonusLife = true;
 }
 
 function endRound() {
@@ -38,7 +44,7 @@ function endRound() {
     alert('You both lost.');
   }
 
-  if (currentMonsterHealth <= 0 || currentPlayerHealth) {
+  if (currentMonsterHealth <= 0 || currentPlayerHealth <= 0) {
     reset();
   }
 }
