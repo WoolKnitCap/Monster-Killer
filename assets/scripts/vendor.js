@@ -8,8 +8,8 @@ const healBtn = document.getElementById('heal-btn');
 const logBtn = document.getElementById('log-btn');
 
 function adjustHealthBars(maxLife) {
-  monsterHealthBar.max = maxLife;
-  monsterHealthBar.value = maxLife;
+  monsterHealthBar.max = maxLife * 2;
+  monsterHealthBar.value = maxLife * 2;
   playerHealthBar.max = maxLife;
   playerHealthBar.value = maxLife;
 }
