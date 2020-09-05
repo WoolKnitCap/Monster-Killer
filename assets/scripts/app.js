@@ -12,7 +12,6 @@ adjustHealthBars(maxLife);
 function endRound() {
   const playerDamage = dealPlayerDamage(MONSTER_ATK);
   currentPlayerHealth -= playerDamage;
-  setPlayerHealth(currentPlayerHealth);
   if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
     alert('You Won!');
   } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
@@ -43,8 +42,14 @@ function strongAttackHandler() {
 }
 
 function healPlayerHandler() {
-  increasePlayerHealth(LAY_HANDS);
-  currentPlayerHealth += LAY_HANDS;
+  let healValue;
+  if (currentPlayerHealth >= maxLife - LAY_HANDS) {
+    healValue = maxLife - currentPlayerHealth;
+  } else {
+    healValue = LAY_HANDS;
+  }
+  increasePlayerHealth(healValue);
+  currentPlayerHealth += healValue;
   endRound();
 }
 
