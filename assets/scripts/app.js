@@ -10,6 +10,13 @@ let hasBonusLife = true;
 
 adjustHealthBars(maxLife);
 
+function reset() {
+  let currentMonsterHealth = maxLife * 2;
+  let currentPlayerHealth = maxLife;
+  resetGame(maxLife);
+  hasBonusLife = true;
+}
+
 function endRound() {
   const initialPlayerHealth = currentPlayerHealth;
   const playerDamage = dealPlayerDamage(MONSTER_ATK);
@@ -29,6 +36,10 @@ function endRound() {
     alert('You Lost!');
   } else if (currentMonsterHealth <= 0 && currentPlayerHealth <= 0) {
     alert('You both lost.');
+  }
+
+  if (currentMonsterHealth <= 0 || currentPlayerHealth) {
+    reset();
   }
 }
 
