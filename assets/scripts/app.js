@@ -11,12 +11,24 @@ const LOG_EVENT_MONSTER_ATTACK = 'MONSTER ATTACK';
 const LOG_EVENT_PLAYER_HEAL = 'PLAYER HEAL';
 const LOG_EVENT_GAME_OVER = 'GAME OVER';
 
-const pcValue = prompt("Player's max HP?", '100');
-
-let maxLife = parseInt(pcValue);
 let battleLog = [];
 
-if (isNaN(maxLife) || maxLife <= 0) {
+function getMaxLifeValues() {
+  const pcValue = prompt("Player's max HP?", '100');
+
+  const parsedValue = parseInt(pcValue);
+  if (isNaN(parsedValue) || parsedValue <= 0) {
+    throw { message: 'Invalid user input.' };
+  }
+  return parsedValue;
+}
+
+let maxLife;
+
+try {
+  maxLife = getMaxLifeValues();
+} catch (error) {
+  console.log(error);
   maxLife = 100;
 }
 
